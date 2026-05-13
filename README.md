@@ -120,9 +120,18 @@ Firebase 설정 파일(`GoogleService-Info.plist`)과 환경 변수가 필요합
 
 ## 📱 스크린샷
 
-| 홈 | 명함 제작 | QR 공유 | 지갑 |
-|:---:|:---:|:---:|:---:|
-| 내 명함 관리 | 11가지 스타일 | QR 즉시 공유 | 받은 명함 저장 |
+<p align="center">
+  <img src="images/01-hero.png" width="18%" />
+  <img src="images/02-share.png" width="18%" />
+  <img src="images/03-studio.png" width="18%" />
+  <img src="images/04-scan.png" width="18%" />
+</p>
+<p align="center">
+  <img src="images/05-wallet.png" width="18%" />
+  <img src="images/06-save.png" width="18%" />
+  <img src="images/07-ai.png" width="18%" />
+  <img src="images/08-badges.png" width="18%" />
+</p>
 
 ---
 
