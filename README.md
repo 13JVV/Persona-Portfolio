@@ -23,33 +23,33 @@ QR 코드 기반 공유, AI 명함 스캔, Apple Wallet 연동까지 — 명함 
 
 ## 주요 기능
 
-### 🪪 명함 생성 & 편집
+###  명함 생성 & 편집
 - 11가지 그라디언트 + 글래스모피즘 6종 디자인 테마
 - 실시간 명함 프리뷰 (CardPreview 컴포넌트)
 - 배경사진 / 프로필 사진 업로드 (Firebase Storage 연동)
 - 명함 자동 업데이트 (Firestore `onSnapshot` 실시간 동기화)
 
-### 🤖 AI 기능 (Claude API)
+###  AI 기능 (Claude API)
 - **종이명함 OCR 스캔**: 카메라로 종이 명함 촬영 → Claude API가 텍스트 자동 추출 및 필드 파싱
 - **AI 대화 주제 추천**: 받은 명함 기반으로 첫 대화 아이디어 추천
 - Firebase Cloud Functions를 프록시로 활용해 API 키 보안 처리
 
-### 📲 공유 & 수신
+###  공유 & 수신
 - QR 코드 생성 및 공유
 - 카카오톡 공유 → 딥링크(`persona://`) → 지갑 자동 저장
 - 웹 명함 페이지: `persona-772ab.web.app/card/{userId}` (Three.js 3D 렌더링)
 
-### 👛 명함 지갑
+###  명함 지갑
 - 받은 명함 관리 (만남 맥락 태그 + 행사 그룹핑)
 - Apple Wallet 패스 생성 및 저장 (Firebase Functions 서버사이드 서명)
 - 팔로업 알림 (notifee), 리마인더 날짜 직접 설정
 - 명함 만료 알림, 대화 타임라인
 
-### 🔐 인증
+###  인증
 - 카카오 / 네이버 / 구글 / 이메일 / Apple 로그인 (5종)
 - Firebase Auth 기반 통합 인증
 
-### 🌗 기타
+###  기타
 - 다크 / 라이트 모드 지원
 - 홈화면 위젯 (App Groups 연동)
 - 탭바 한글화
