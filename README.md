@@ -1,151 +1,167 @@
 # Persona — 디지털 명함 iOS 앱
 
-> 나만의 명함을 만들고, QR 하나로 즉시 공유하는 스마트 명함 앱
-
-[![Platform](https://img.shields.io/badge/Platform-iOS-1B2A4A)](https://apps.apple.com)
-[![React Native](https://img.shields.io/badge/React%20Native-0.84-E9D9A8)](https://reactnative.dev)
-[![Firebase](https://img.shields.io/badge/Firebase-Firestore-orange)](https://firebase.google.com)
-[![Status](https://img.shields.io/badge/Status-App%20Store%20Review-green)]()
+> **App Store 출시 완료** | React Native | Firebase | Claude AI  
+> 🔗 [App Store 다운로드](https://apps.apple.com/kr/app/id6769245736) · [웹 명함 페이지](https://persona-772ab.web.app)
 
 ---
 
-## 📱 프로젝트 소개
+## 프로젝트 개요
 
-Persona는 산업경영공학과 4학년 재학 중 **기획부터 개발, 출시까지 혼자 진행한 iOS 앱**입니다.
+**Persona**는 종이 명함을 대체하는 스마트 디지털 명함 iOS 앱입니다.  
+QR 코드 기반 공유, AI 명함 스캔, Apple Wallet 연동까지 — 명함 교환의 전 과정을 디지털화했습니다.
 
-종이 명함의 비효율을 디지털로 해결하고자 시작했습니다. 단순한 연락처 공유를 넘어, **브랜딩 가능한 명함 디자인 + QR 공유 + 지갑 관리 + AI 한줄소개 생성**까지 하나의 앱에 담았습니다.
-
-현재 App Store 심사 제출 준비 중입니다.
-
----
-
-## 🛠 기술 스택
-
-| 분류 | 기술 |
+| 항목 | 내용 |
 |------|------|
-| **Frontend** | React Native 0.84, TypeScript |
-| **Backend** | Firebase Firestore, Firebase Auth, Firebase Functions |
-| **AI** | Anthropic Claude API (한줄소개 생성) |
-| **인증** | 카카오, 네이버, 구글 소셜 로그인 |
-| **배포** | Firebase Hosting, App Store (심사 중) |
+| 플랫폼 | iOS (React Native 0.84.1) |
+| 출시일 | 2026년 (App Store 심사 통과) |
+| 번들 ID | com.jaewoo.persona |
+| App Store ID | 6769245736 |
+| 백엔드 | Firebase (Firestore, Auth, Storage, Functions) |
+| 웹 | Firebase Hosting (persona-772ab.web.app) |
 
 ---
 
-## ✨ 주요 기능
+## 주요 기능
 
-### 1. 명함 제작 (Studio)
-- 11가지 그라디언트 + 6가지 글래스모피즘 스킨
-- 클래식 / 좌측 / 우측 레이아웃 선택
-- 프로필 이미지, 배경 이미지 커스터마이징
-- GitHub, Notion, LinkedIn 등 포트폴리오 링크 임베드
+### 🪪 명함 생성 & 편집
+- 11가지 그라디언트 + 글래스모피즘 6종 디자인 테마
+- 실시간 명함 프리뷰 (CardPreview 컴포넌트)
+- 배경사진 / 프로필 사진 업로드 (Firebase Storage 연동)
+- 명함 자동 업데이트 (Firestore `onSnapshot` 실시간 동기화)
 
-### 2. QR 공유 (Share)
-- QR코드로 즉시 명함 공유
-- 이메일 서명 자동 생성 (이미지/텍스트)
-- Zoom 배경 이미지 생성
+### 🤖 AI 기능 (Claude API)
+- **종이명함 OCR 스캔**: 카메라로 종이 명함 촬영 → Claude API가 텍스트 자동 추출 및 필드 파싱
+- **AI 대화 주제 추천**: 받은 명함 기반으로 첫 대화 아이디어 추천
+- Firebase Cloud Functions를 프록시로 활용해 API 키 보안 처리
 
-### 3. 명함 지갑 (Wallet)
-- 받은 명함 QR 스캔으로 자동 저장
-- 즐겨찾기, 정렬, 검색 기능
-- 명함 모을수록 획득하는 배지 시스템 (게이미피케이션)
+### 📲 공유 & 수신
+- QR 코드 생성 및 공유
+- 카카오톡 공유 → 딥링크(`persona://`) → 지갑 자동 저장
+- 웹 명함 페이지: `persona-772ab.web.app/card/{userId}` (Three.js 3D 렌더링)
 
-### 4. AI 한줄소개
-- Claude API를 활용한 개인화 한줄소개 생성
-- 마음에 들지 않으면 재생성 가능
+### 👛 명함 지갑
+- 받은 명함 관리 (만남 맥락 태그 + 행사 그룹핑)
+- Apple Wallet 패스 생성 및 저장 (Firebase Functions 서버사이드 서명)
+- 팔로업 알림 (notifee), 리마인더 날짜 직접 설정
+- 명함 만료 알림, 대화 타임라인
+
+### 🔐 인증
+- 카카오 / 네이버 / 구글 / 이메일 / Apple 로그인 (5종)
+- Firebase Auth 기반 통합 인증
+
+### 🌗 기타
+- 다크 / 라이트 모드 지원
+- 홈화면 위젯 (App Groups 연동)
+- 탭바 한글화
 
 ---
 
-## 🏗 아키텍처
+## 기술 스택
+
+### 프론트엔드
+| 기술 | 용도 |
+|------|------|
+| React Native 0.84.1 | iOS 앱 개발 |
+| TypeScript | 타입 안정성 |
+| notifee | 로컬 푸시 알림 |
+| react-native-vision-camera | OCR 카메라 |
+
+### 백엔드 / 인프라
+| 기술 | 용도 |
+|------|------|
+| Firebase Firestore | 실시간 데이터베이스 |
+| Firebase Auth | 소셜 로그인 통합 |
+| Firebase Storage | 이미지 업로드 |
+| Firebase Cloud Functions | Claude API 프록시, Apple Wallet 패스 생성, OG 데이터 파싱 |
+| Firebase Hosting | 웹 명함 페이지 배포 |
+
+### 외부 API / 서비스
+| 서비스 | 용도 |
+|--------|------|
+| Claude API (Anthropic) | OCR, AI 대화 추천 |
+| Apple Wallet (PassKit) | 디지털 명함 패스 |
+| 카카오 SDK | 로그인, 공유, 딥링크 |
+| 네이버 OAuth | 로그인 |
+| Three.js | 웹 명함 3D 렌더링 |
+
+---
+
+## 아키텍처
 
 ```
-src/
-├── screens/          # 화면 컴포넌트
-│   ├── HomeScreen      # 내 명함 관리
-│   ├── WalletScreen    # 받은 명함 지갑
-│   ├── ShareScreen     # QR 공유
-│   ├── EditorScreen    # 명함 편집 (Studio)
-│   └── SettingsScreen  # 설정
-├── components/       # 공통 컴포넌트
-│   ├── CardPreview     # 명함 렌더링
-│   ├── BadgeIcon       # 배지 SVG 컴포넌트
-│   └── OrgSearchInput  # 학교/회사 검색
-├── services/         # 비즈니스 로직
-│   ├── firebase.ts     # Firebase 설정
-│   ├── wallet.ts       # 지갑 CRUD
-│   ├── theme.ts        # 디자인 시스템
-│   └── settings.ts     # 앱 설정 관리
-└── data/             # 로컬 데이터
-    ├── universities.ts  # 한국 대학교 400개
-    └── companies.ts     # 국내 기업 데이터
+사용자
+  │
+  ├── iOS 앱 (React Native)
+  │     ├── 명함 생성/편집 (Firestore 저장)
+  │     ├── QR 공유 → 딥링크 수신
+  │     ├── OCR 스캔 → claudeProxy (Cloud Function) → Claude API
+  │     └── Apple Wallet → generateWalletPass (Cloud Function)
+  │
+  └── 웹 (Firebase Hosting)
+        └── card.html → Firestore 명함 데이터 → Three.js 렌더링
 ```
 
 ---
 
-## 📊 개발 과정에서 해결한 문제들
+## 프로젝트 구조
 
-### 오프라인 대응
-Firestore 연결 실패 시 AsyncStorage 캐시로 fallback하여 오프라인에서도 명함 조회 가능하도록 구현했습니다.
-
-### 성능 최적화
-대학교/학과 검색 시 기존 Firestore API 호출 방식에서 **로컬 즉시 검색**으로 전환하여 응답 속도를 개선했습니다. (400개 대학, 200개 학과 로컬 데이터)
-
-### LinearGradient 렌더링 이슈
-`overflow: 'hidden'`이 LinearGradient 렌더링을 방해하는 문제를 파악하고, wrapper 구조를 분리하여 해결했습니다.
-
-### 앱 심사 대응
-Apple App Store 심사 기준에 맞춰 계정 삭제 기능, 개인정보처리방침 외부 URL, AI 데이터 전송 명시 등을 직접 구현했습니다.
-
----
-
-## 🚀 실행 방법
-
-```bash
-# 패키지 설치
-npm install
-
-# iOS Pod 설치
-cd ios && bundle exec pod install && cd ..
-
-# Metro 실행
-npx react-native start --reset-cache
-
-# iOS 빌드
-npx react-native run-ios
+```
+Persona/
+├── src/
+│   ├── screens/
+│   │   ├── HomeScreen.tsx       # 명함 목록 + ViewShot 저장
+│   │   ├── ShareScreen.tsx      # 공유 + 딥링크
+│   │   ├── WalletScreen.tsx     # 받은 명함 지갑
+│   │   ├── CardScanScreen.tsx   # OCR 스캔
+│   │   ├── EditorScreen.tsx     # 명함 편집
+│   │   └── SettingsScreen.tsx   # 설정 + 프로필
+│   ├── services/
+│   │   ├── firebase.ts
+│   │   ├── wallet.ts
+│   │   ├── cards.ts
+│   │   └── settings.ts
+│   └── components/
+│       └── CardPreview.tsx      # 명함 렌더링
+├── functions/
+│   ├── public/
+│   │   └── card.html            # 웹 명함 페이지
+│   └── functions/lib/index.js   # Cloud Functions
+└── ios/
 ```
 
-### 환경 변수
-Firebase 설정 파일(`GoogleService-Info.plist`)과 환경 변수가 필요합니다.
+---
+
+## 개발 환경
+
+| 항목 | 버전 |
+|------|------|
+| macOS | 26 베타 |
+| Xcode | 26.2 |
+| React Native | 0.84.1 |
+| Node.js | v24.14.0 |
+| Ruby | 3.3.11 |
+| CocoaPods | 1.16.2 |
 
 ---
 
-## 📱 스크린샷
+## 향후 개발 계획 (v1.2)
 
-<p align="center">
-  <img src="images/01-hero.png" width="18%" />
-  <img src="images/02-share.png" width="18%" />
-  <img src="images/03-studio.png" width="18%" />
-  <img src="images/04-scan.png" width="18%" />
-</p>
-<p align="center">
-  <img src="images/05-wallet.png" width="18%" />
-  <img src="images/06-save.png" width="18%" />
-  <img src="images/07-ai.png" width="18%" />
-  <img src="images/08-badges.png" width="18%" />
-</p>
+### 기업용 팀 기능
+- 팀 생성 및 초대 코드 시스템
+- 관리자: 팀원 명함 브랜드 통일 (로고/색상)
+- 통계 대시보드 (팀원별 조회수)
+- 수익 모델: 팀 Pro 월 19,900원 / Enterprise 월 49,900원
 
----
-
-## 🔗 관련 링크
-
-- **개인정보처리방침**: [persona-772ab.web.app/privacy.html](https://persona-772ab.web.app/privacy.html)
-- **지원 페이지**: [persona-772ab.web.app](https://persona-772ab.web.app)
+### 장기 로드맵
+- 커스텀 도메인 (persona.io)
+- Android 포팅
+- 다국어 지원 (영어)
+- NFC 카드 하드웨어 연동
 
 ---
 
-## 👨‍💻 개발자
+## 개발자
 
-**신재우** — 인하대학교 산업경영공학과 4학년
-
-기획 · 디자인 · 개발 · 출시 준비 전 과정을 혼자 진행했습니다.
-
-> 코딩 전공자가 아닌 산업공학도로서, 문제를 정의하고 실제로 작동하는 서비스로 만드는 과정에 집중했습니다.
+산업경영공학과 4학년  
+Apple Developer Program 등록 완료 (Team ID: R9X886G4DM)  
+App Store 단독 출시 및 운영 중
